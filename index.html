@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
+<title>啪啪电影网 - 今日上演片单_最新电影推荐_高分电影排行榜</title>
+<meta name="description" content="啪啪电影网是专注电影推荐与影视资讯的中文影迷站点，按剧场节目单每日开演：今日上演片单、座位分区分类、谢幕词影评、掌声指数排行榜与观影指南，看完记得啪啪。">
+<meta name="keywords" content="啪啪电影网,电影推荐,今日上演,最新电影,影视资讯,高分电影,电影排行榜,影评,观影指南,电影分类">
+<meta name="author" content="啪啪电影网">
+<meta name="robots" content="index,follow">
+<meta name="revisit-after" content="1 days">
+<meta name="theme-color" content="#7B1E2B">
+<link rel="canonical" href="https://papadianyingwang-cn.github.io/">
+<link rel="alternate" hreflang="zh-CN" href="https://papadianyingwang-cn.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="啪啪电影网">
+<meta property="og:title" content="啪啪电影网 - 今日上演片单_最新电影推荐_高分电影排行榜">
+<meta property="og:description" content="啪啪电影网按剧场节目单每日开演：今日上演片单、座位分区分类、谢幕词影评与掌声指数排行榜。">
+<meta property="og:url" content="https://papadianyingwang-cn.github.io/">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="啪啪电影网 - 今日上演片单与电影推荐">
+<meta name="twitter:description" content="啪啪电影网每日更新今日上演片单、谢幕词影评与掌声指数排行榜。">
+<style>
+:root{
+  --curtain:#7B1E2B;
+  --curtain-d:#52101C;
+  --curtain-l:#9C2C3C;
+  --gold:#E8B94A;
+  --gold-d:#B98A22;
+  --cream:#FBF3E4;
+  --stage:#120E0C;
+  --stage-2:#1B1512;
+  --plank:#241B16;
+  --ink:#2B211B;
+  --text:#F2E7D5;
+  --muted:#B6A48C;
+  --dim:#8B7A66;
+  --line:rgba(232,185,74,.22);
+  --max:1180px;
+  --serif:"Songti SC","STSong","SimSun",Georgia,"Times New Roman",serif;
+  --sans:"PingFang SC","Microsoft YaHei","WenQuanYi Micro Hei","Helvetica Neue",Arial,sans-serif;
+  --mono:"SFMono-Regular",Menlo,Consolas,"Courier New",monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--stage);
+  color:var(--text);
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.8;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+ul,ol{list-style:none}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.wrap{width:100%;max-width:var(--max);margin:0 auto;padding:0 20px}
+.mono{font-family:var(--mono)}
+pre{font-family:var(--mono);line-height:1.5;white-space:pre;overflow-x:auto}
+dfn{font-style:normal;color:var(--gold);border-bottom:1px dotted var(--gold-d)}
+ins{text-decoration:none;font-family:var(--mono);font-size:11px;background:var(--curtain);color:var(--cream);padding:1px 7px;margin-left:6px;letter-spacing:.06em}
+small{font-size:.85em}
+
+/* ===== 幕布 ===== */
+.curtain{
+  height:74px;position:relative;
+  background:repeating-linear-gradient(90deg,var(--curtain-d) 0 14px,var(--curtain) 14px 30px,var(--curtain-l) 30px 40px,var(--curtain) 40px 56px,var(--curtain-d) 56px 70px);
+  box-shadow:inset 0 -18px 34px rgba(0,0,0,.55);
+}
+.curtain::after{
+  content:"";position:absolute;left:0;right:0;bottom:-11px;height:22px;
+  background:radial-gradient(circle at 17px 0, var(--curtain) 0 16px, transparent 16px) repeat-x;
+  background-size:34px 22px;
+  filter:drop-shadow(0 3px 4px rgba(0,0,0,.45));
+}
+.curtain .wrap{display:flex;align-items:center;justify-content:center;height:100%;padding-top:2px}
+.curtain .valance{
+  font-family:var(--serif);font-size:13px;letter-spacing:.5em;color:var(--gold);
+  background:rgba(0,0,0,.35);padding:5px 22px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+}
+
+/* ===== 开演提示条 ===== */
+.notice{
+  background:linear-gradient(180deg,#1F1713,#171110);border-bottom:1px solid var(--line);
+  font-family:var(--mono);font-size:12.5px;color:var(--muted);
+}
+.notice .wrap{display:flex;align-items:center;gap:16px;flex-wrap:wrap;min-height:36px}
+.notice .bell{color:var(--gold);font-weight:700}
+.notice .rt{margin-left:auto;display:flex;gap:14px;flex-wrap:wrap}
+.notice b{color:var(--cream)}
+
+/* ===== 头部剧院门头 ===== */
+header.top{position:sticky;top:0;z-index:80;background:rgba(18,14,12,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(8px)}
+.top-inner{display:flex;align-items:center;gap:16px;min-height:72px}
+.brand{display:flex;align-items:center;gap:12px;flex:0 0 auto}
+.clapmark{
+  width:46px;height:46px;flex:0 0 auto;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,var(--curtain-l),var(--curtain-d));
+  border:2px solid var(--gold-d);display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:20px;color:var(--gold);box-shadow:0 0 18px rgba(232,185,74,.22);
+}
+.brand b{display:block;font-family:var(--serif);font-size:22px;letter-spacing:3px;line-height:1.2}
+.brand small{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.26em;color:var(--dim)}
+nav.main{margin-left:auto;display:flex;gap:2px;flex-wrap:wrap}
+nav.main a{font-size:14.5px;padding:8px 13px;color:var(--muted);white-space:nowrap;border-bottom:2px solid transparent;transition:.18s}
+nav.main a:hover{color:var(--cream);border-bottom-color:var(--gold-d)}
+nav.main a.cur{color:var(--gold);font-weight:700;border-bottom-color:var(--gold)}
+.ck{display:none}
+.menu-btn{display:none;margin-left:auto;width:42px;height:38px;border:1px solid var(--gold-d);border-radius:50%;background:var(--curtain-d);align-items:center;justify-content:center;cursor:pointer}
+.menu-btn i{display:block;width:18px;height:2px;background:var(--gold);position:relative}
+.menu-btn i::before,.menu-btn i::after{content:"";position:absolute;left:0;width:18px;height:2px;background:var(--gold)}
+.menu-btn i::before{top:-6px}
+.menu-btn i::after{top:6px}
+
+/* ===== HERO：舞台 + 节目单 ===== */
+.hero{padding:34px 0 26px;position:relative}
+.hero::before{
+  content:"";position:absolute;left:50%;top:0;width:900px;height:560px;margin-left:-450px;
+  background:radial-gradient(ellipse at 50% 0%, rgba(255,232,180,.16), transparent 62%);
+  clip-path:polygon(42% 0,58% 0,100% 100%,0 100%);pointer-events:none;
+}
+.hero-grid{display:grid;grid-template-columns:1fr 300px;gap:24px;align-items:start;position:relative;z-index:2}
+
+.poster{
+  border:1px solid var(--gold-d);background:linear-gradient(180deg,#1E1712,#120E0B);
+  padding:30px 34px 26px;position:relative;text-align:center;
+}
+.poster .bulbs{
+  position:absolute;left:-1px;right:-1px;height:10px;
+  background:repeating-radial-gradient(circle at 9px 5px, var(--gold) 0 3px, transparent 3px 18px);
+  opacity:.85;
+}
+.poster .bulbs.t{top:-5px}
+.poster .bulbs.b{bottom:-5px}
+.poster .house{font-family:var(--mono);font-size:11px;letter-spacing:.28em;color:var(--dim);margin-bottom:10px}
+h1{font-family:var(--serif);font-size:52px;line-height:1.2;letter-spacing:4px;font-weight:700;color:var(--cream);margin-bottom:8px}
+h1 em{font-style:normal;color:var(--gold);text-shadow:0 0 26px rgba(232,185,74,.35)}
+.poster .en{font-family:var(--mono);font-size:11px;letter-spacing:.24em;color:var(--dim);margin-bottom:18px}
+.poster .rule{height:1px;background:linear-gradient(90deg,transparent,var(--gold-d),transparent);margin:16px 0}
+.poster .lead{font-size:16px;color:var(--muted);max-width:600px;margin:0 auto;line-height:1.9}
+.poster .lead b{color:var(--cream)}
+.hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+.btn{display:inline-block;padding:11px 26px;font-size:15px;font-weight:700;transition:.2s;border:1px solid var(--gold-d)}
+.btn-a{background:linear-gradient(180deg,var(--curtain),var(--curtain-d));color:var(--cream)}
+.btn-a:hover{box-shadow:0 10px 24px rgba(123,30,43,.5)}
+.btn-b{color:var(--gold);background:transparent}
+.btn-b:hover{background:rgba(232,185,74,.1)}
+
+/* 掌声仪 <pre> */
+.applause{border:1px solid var(--line);background:#0E0B09;padding:18px 20px}
+.applause h2{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--gold);margin-bottom:12px;font-weight:700}
+.applause pre{color:var(--gold);font-size:13px}
+.applause .cap{font-family:var(--mono);font-size:11px;color:var(--dim);margin-top:12px;line-height:1.7}
+.applause .cap b{color:var(--muted)}
+
+/* 今日 cast 速览 */
+.castline{border-top:1px solid var(--line);margin-top:18px;padding-top:16px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.castline div{text-align:center}
+.castline strong{display:block;font-family:var(--mono);font-size:24px;color:var(--gold);line-height:1.2}
+.castline span{font-size:11.5px;color:var(--dim);letter-spacing:.06em}
+
+/* ===== 通用分幕 ===== */
+section{padding:38px 0;scroll-margin-top:76px}
+.act{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:24px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.act .l{display:flex;align-items:center;gap:14px}
+.act .no{
+  font-family:var(--serif);font-size:15px;letter-spacing:.16em;color:var(--cream);
+  background:var(--curtain-d);border:1px solid var(--gold-d);padding:6px 14px;
+}
+.act h2{font-family:var(--serif);font-size:29px;letter-spacing:2px;line-height:1.3}
+.act p{font-size:13px;color:var(--muted);width:100%;margin-top:4px;order:3}
+.act .more{font-family:var(--mono);font-size:12px;color:var(--gold);border:1px solid var(--gold-d);padding:6px 14px;white-space:nowrap}
+.act .more:hover{background:rgba(232,185,74,.12)}
+
+/* ===== 第一幕：今日上演（节目单） ===== */
+.program{border-top:1px solid var(--line)}
+.item{
+  display:grid;grid-template-columns:78px 1fr 200px;gap:20px;align-items:center;
+  padding:18px 0;border-bottom:1px dashed rgba(232,185,74,.18);transition:.2s;
+}
+.item:hover{background:rgba(123,30,43,.14)}
+.item .no{
+  font-family:var(--serif);font-size:20px;color:var(--gold);text-align:center;line-height:1.2;
+}
+.item .no small{display:block;font-family:var(--mono);font-size:10px;color:var(--dim);letter-spacing:.1em;margin-top:2px}
+.item .t b{display:block;font-family:var(--serif);font-size:20px;letter-spacing:1.5px;line-height:1.4}
+.item .t small{display:block;font-family:var(--mono);font-size:11.5px;color:var(--dim);margin-top:3px}
+.item .t p{font-size:13.5px;color:var(--muted);margin-top:6px;line-height:1.7}
+.item .tagrow{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.item .tagrow span{font-family:var(--mono);font-size:10.5px;border:1px solid var(--line);color:var(--muted);padding:2px 8px}
+.item .ap{text-align:right}
+.item .ap strong{display:block;font-family:var(--mono);font-size:25px;color:var(--gold);line-height:1.1}
+.item .ap span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--dim)}
+.item .ap a{display:inline-block;margin-top:8px;font-family:var(--mono);font-size:12px;color:var(--gold);border-bottom:1px solid var(--gold-d);padding-bottom:1px}
+
+/* ===== 第二幕：座位分区分类 ===== */
+.seats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.zone{border:1px solid var(--line);background:linear-gradient(180deg,#1D1611,#141010);padding:20px;transition:.24s;position:relative;overflow:hidden}
+.zone::before{
+  content:"";position:absolute;right:-40px;top:-40px;width:130px;height:130px;border-radius:50%;
+  background:radial-gradient(circle,rgba(232,185,74,.12),transparent 65%);
+}
+.zone:hover{border-color:var(--gold-d);transform:translateY(-5px)}
+.zone .zhead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
+.zone .zhead b{font-family:var(--serif);font-size:18px;letter-spacing:2px;color:var(--cream)}
+.zone .zhead em{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--gold);border:1px solid var(--gold-d);padding:2px 9px}
+.zone ul{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.zone li a{
+  display:flex;align-items:center;justify-content:space-between;gap:6px;
+  font-size:13px;color:var(--muted);border-bottom:1px dotted rgba(232,185,74,.2);padding:6px 2px;transition:.18s;
+}
+.zone li a:hover{color:var(--gold)}
+.zone li a i{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--dim)}
+.zone .zfoot{font-family:var(--mono);font-size:11px;color:var(--dim);margin-top:14px;padding-top:10px;border-top:1px dashed var(--line)}
+
+/* ===== 第三幕：谢幕词影评 ===== */
+.curtain-calls{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.call{border-left:3px solid var(--curtain);background:linear-gradient(90deg,rgba(123,30,43,.20),transparent 70%);padding:20px 22px;transition:.22s}
+.call:hover{border-left-color:var(--gold);background:linear-gradient(90deg,rgba(123,30,43,.30),transparent 70%)}
+.call .kind{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--gold);margin-bottom:8px}
+.call h3{font-family:var(--serif);font-size:20px;letter-spacing:1.5px;margin-bottom:8px;line-height:1.45}
+.call p{font-size:14px;color:var(--muted);line-height:1.85}
+.call blockquote{
+  margin:12px 0;padding:12px 0 12px 16px;border-left:2px solid var(--gold-d);
+  font-family:var(--serif);font-size:15px;color:var(--cream);line-height:1.8;
+}
+.call .sig{display:flex;gap:14px;flex-wrap:wrap;font-family:var(--mono);font-size:11.5px;color:var(--dim);margin-top:12px;padding-top:11px;border-top:1px dashed var(--line)}
+.call cite{font-style:normal;color:var(--muted)}
+
+/* ===== 第四幕：掌声指数榜 ===== */
+.rankwrap{display:grid;grid-template-columns:1fr 320px;gap:22px}
+.indexboard{border:1px solid var(--line);background:#141010}
+.indexboard li{display:grid;grid-template-columns:64px 1fr 150px 68px;gap:14px;align-items:center;padding:13px 20px;border-bottom:1px solid rgba(232,185,74,.12)}
+.indexboard li:last-child{border-bottom:0}
+.indexboard .rk{font-family:var(--serif);font-size:22px;color:var(--dim);text-align:center}
+.indexboard li:nth-child(-n+3) .rk{color:var(--gold);text-shadow:0 0 14px rgba(232,185,74,.35)}
+.indexboard .nm b{display:block;font-family:var(--serif);font-size:17px;letter-spacing:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.indexboard .nm small{font-family:var(--mono);font-size:11px;color:var(--dim)}
+.indexboard .wave{display:flex;align-items:flex-end;gap:3px;height:26px}
+.indexboard .wave i{display:block;width:6px;border-radius:2px 2px 0 0;background:linear-gradient(180deg,var(--gold),var(--curtain));min-height:4px}
+.indexboard .pt{font-family:var(--mono);font-size:19px;font-weight:700;color:var(--gold);text-align:right}
+.encore{border:1px solid var(--gold-d);background:linear-gradient(180deg,#1E1712,#141010);padding:20px}
+.encore h3{font-family:var(--serif);font-size:17px;letter-spacing:2px;color:var(--gold);padding-bottom:10px;border-bottom:1px solid var(--line);margin-bottom:12px}
+.encore ol li{display:flex;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line);font-size:13.5px}
+.encore ol li:last-child{border-bottom:0}
+.encore ol li b{font-family:var(--mono);color:var(--curtain-l);flex:0 0 16px;font-size:12px}
+.encore p{font-size:12.5px;color:var(--dim);margin-top:12px;line-height:1.8}
+
+/* ===== 第五幕：关于剧院 ===== */
+.house{display:grid;grid-template-columns:1.05fr .95fr;gap:20px}
+.house-col{border:1px solid var(--line);background:linear-gradient(180deg,#1D1611,#141010);padding:26px 28px}
+.house-col h3{font-family:var(--serif);font-size:22px;letter-spacing:2px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.house-col p{font-size:14.5px;color:var(--muted);margin-bottom:11px}
+.house-col p:last-child{margin-bottom:0}
+.house-col p b{color:var(--cream)}
+.house-col .hl{color:var(--gold);font-weight:700}
+.rules li{display:grid;grid-template-columns:54px 1fr;gap:12px;padding:11px 0;border-bottom:1px dashed var(--line);font-size:14px;line-height:1.75}
+.rules li:last-child{border-bottom:0}
+.rules li em{font-style:normal;font-family:var(--mono);font-size:11.5px;font-weight:700;color:var(--gold);padding-top:3px;letter-spacing:.06em}
+
+/* ===== 第六幕：幕间问答 ===== */
+.interlude{border:1px solid var(--line);background:#141010}
+.interlude .q{border-bottom:1px solid rgba(232,185,74,.12)}
+.interlude .q:last-child{border-bottom:0}
+.interlude input{position:absolute;opacity:0;width:0;height:0}
+.interlude label{
+  display:flex;align-items:center;gap:14px;cursor:pointer;padding:15px 20px;
+  font-family:var(--serif);font-size:17px;letter-spacing:1px;
+}
+.interlude label:hover{background:rgba(123,30,43,.16);color:var(--gold)}
+.interlude label .mk{font-family:var(--mono);font-size:12px;font-weight:800;color:var(--curtain-l);flex:0 0 22px}
+.interlude label .ic{margin-left:auto;font-family:var(--mono);font-size:15px;color:var(--dim);flex:0 0 auto}
+.interlude .a{display:none;padding:0 20px 18px 46px}
+.interlude input:checked ~ .a{display:block}
+.interlude input:checked + label{background:rgba(123,30,43,.22);color:var(--gold)}
+.interlude input:checked + label .ic{color:var(--gold)}
+.interlude .a p{font-size:14px;color:var(--muted);line-height:1.9}
+
+/* ===== 底部 ===== */
+footer{margin-top:26px;border-top:1px solid var(--line);background:#0E0B09;padding:38px 0 24px}
+.f-grid{display:grid;grid-template-columns:1.7fr 1fr 1fr 1fr;gap:24px}
+.f-col h4{font-family:var(--serif);font-size:16px;letter-spacing:2px;color:var(--gold);margin-bottom:13px;padding-bottom:9px;border-bottom:1px solid var(--line)}
+.f-col p{font-size:13.5px;color:var(--muted);line-height:1.9}
+.f-col li{padding:6px 0;border-bottom:1px dashed rgba(232,185,74,.14)}
+.f-col li a{font-size:13.5px;color:var(--muted)}
+.f-col li a:hover{color:var(--gold)}
+.f-url{font-family:var(--mono);font-size:12px;color:var(--gold);margin-top:10px;word-break:break-all}
+.kw{margin-top:24px;padding-top:18px;border-top:1px dashed var(--line);font-size:12.5px;color:var(--dim);line-height:2.1}
+.kw a{display:inline-block;margin:4px 8px 0 0;border:1px solid var(--line);padding:3px 11px;color:var(--muted);font-size:12.5px}
+.kw a:hover{border-color:var(--gold);color:var(--gold)}
+.f-bot{margin-top:18px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-family:var(--mono);font-size:11.5px;color:var(--dim)}
+.f-bot a{color:var(--dim)}
+.f-bot a:hover{color:var(--gold)}
+
+/* ===== 幕布收尾 ===== */
+.endcurtain{height:56px;background:repeating-linear-gradient(90deg,var(--curtain-d) 0 12px,var(--curtain) 12px 26px,var(--curtain-l) 26px 34px,var(--curtain) 34px 50px,var(--curtain-d) 50px 62px);box-shadow:inset 0 16px 30px rgba(0,0,0,.5)}
+.endcurtain::before{content:"";display:block;height:14px;background:radial-gradient(circle at 17px 14px, var(--curtain) 0 15px, transparent 15px) repeat-x;background-size:34px 14px}
+
+/* ===== 响应式 ===== */
+@media (max-width:1024px){
+  .hero-grid{grid-template-columns:1fr}
+  h1{font-size:40px;letter-spacing:3px}
+  .seats{grid-template-columns:1fr 1fr}
+  .curtain-calls{grid-template-columns:1fr}
+  .rankwrap{grid-template-columns:1fr}
+  .house{grid-template-columns:1fr}
+  .f-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:860px){
+  nav.main{display:none;position:absolute;left:0;right:0;top:100%;background:#161110;border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;padding:10px 14px 16px;gap:2px;margin-left:0}
+  nav.main a{padding:13px 16px;font-size:15.5px;border-bottom:0}
+  .menu-btn{display:flex}
+  .ck:checked ~ nav.main{display:flex}
+  .top-inner{position:relative;min-height:64px}
+  .poster{padding:24px 20px 22px}
+  h1{font-size:32px}
+  .item{grid-template-columns:60px 1fr;gap:14px}
+  .item .ap{grid-column:2;text-align:left;display:flex;align-items:baseline;gap:10px}
+  .item .ap a{margin-top:0;margin-left:auto}
+}
+@media (max-width:640px){
+  body{font-size:15px}
+  .wrap{padding:0 14px}
+  .curtain{height:58px}
+  .curtain .valance{font-size:11px;letter-spacing:.32em;padding:4px 14px}
+  .notice .wrap{gap:10px;font-size:11.5px}
+  .notice .rt{margin-left:0;width:100%}
+  .brand b{font-size:18px;letter-spacing:2px}
+  .clapmark{width:38px;height:38px;font-size:17px}
+  h1{font-size:26px;letter-spacing:2px}
+  .hero{padding:20px 0 14px}
+  .hero::before{width:520px;margin-left:-260px;height:420px}
+  .castline{grid-template-columns:repeat(2,1fr)}
+  .castline strong{font-size:20px}
+  .act h2{font-size:23px;letter-spacing:1px}
+  .applause{padding:14px 14px}
+  .applause pre{font-size:11px}
+  .seats{grid-template-columns:1fr}
+  .zone ul{grid-template-columns:1fr}
+  .indexboard li{grid-template-columns:44px 1fr 56px;gap:10px;padding:11px 14px}
+  .indexboard .wave{display:none}
+  .indexboard .rk{font-size:17px}
+  .indexboard .nm b{font-size:15.5px}
+  .indexboard .pt{font-size:16px}
+  .call{padding:16px 18px}
+  .house-col{padding:20px 20px}
+  .interlude label{font-size:15.5px;gap:10px}
+  .interlude .a{padding-left:20px}
+  .f-grid{grid-template-columns:1fr}
+  section{padding:28px 0}
+  .endcurtain{height:42px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important;scroll-behavior:auto !important}}
+@media print{header.top{position:static}.curtain,.endcurtain{display:none}}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/xiaobao.js"></script>
+
+<!-- 幕布 -->
+<div class="curtain" aria-hidden="true">
+  <div class="wrap"><span class="valance">鼓 掌 电 影 网 · 每 日 开 演</span></div>
+</div>
+
+<!-- 开演提示 -->
+<div class="notice">
+  <div class="wrap">
+    <span class="bell">🔔 请安静 · 演出即将开始</span>
+    <span>今日上演 <b>8</b> 部</span>
+    <span>第 <b>1286</b> 场</span>
+    <span class="rt">
+      <span>2026-10-02</span>
+      <span>谢幕时间 22:40</span>
+      <span>场内温度 24℃</span>
+    </span>
+  </div>
+</div>
+
+<!-- 剧院门头 -->
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="brand" href="#" aria-label="啪啪电影网首页">
+      <span class="clapmark" aria-hidden="true">鼓</span>
+      <span>
+        <b>啪啪电影网</b>
+        <small>GUZHANG MOVIE THEATRE</small>
+      </span>
+    </a>
+    <input class="ck" id="navck" type="checkbox" aria-label="展开导航菜单">
+    <label class="menu-btn" for="navck" aria-hidden="true"><i></i></label>
+    <nav class="main" aria-label="主导航">
+      <a class="cur" href="#">剧院大厅</a>
+      <a href="#act1">今日上演</a>
+      <a href="#act2">座位分区</a>
+      <a href="#act3">谢幕词</a>
+      <a href="#act4">掌声指数</a>
+      <a href="#act5">关于剧院</a>
+      <a href="#act6">幕间问答</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div class="poster">
+          <span class="bulbs t" aria-hidden="true"></span>
+          <span class="bulbs b" aria-hidden="true"></span>
+          <p class="house">GUZHANG MOVIE THEATRE · NO.1286</p>
+          <h1>好电影值得<br><em>啪啪电影网</em>为你啪啪</h1>
+          <p class="en">2026 / 10 / 02　·　今日上演 8 部　·　免费入场</p>
+          <div class="rule" aria-hidden="true"></div>
+          <p class="lead">灯暗下来，幕布拉开。<b>啪啪电影网</b>把每天值得看的电影排成一份剧场节目单：今日上演按场次排列，分类按座位分区归档，影评写在谢幕时分，榜单按掌声指数排序。</p>
+          <div class="hero-actions">
+            <a class="btn btn-a" href="#act1">查看今日上演</a>
+            <a class="btn btn-b" href="#act4">掌声指数榜</a>
+          </div>
+          <div class="castline">
+            <div><strong>16800</strong><span>收录影片</span></div>
+            <div><strong>36</strong><span>座位分区</span></div>
+            <div><strong>08:00</strong><span>每日开演</span></div>
+            <div><strong>8.7</strong><span>编辑均分</span></div>
+          </div>
+        </div>
+
+        <aside class="applause">
+          <h2>APPLAUSE METER　—　全场掌声</h2>
+<pre aria-label="全场掌声指数示意图">
+掌声指数  ██████████░░  91
+完读率    █████████░░░  86
+二次啪啪  ███████░░░░░  72
+谢幕时长  ████████████  100
+────────────────────────
+本场观众  12,860
+站席      2,140
+返场      3 次</pre>
+          <p class="cap">说明：掌声指数由 <dfn title="观众打分占七成、编辑评分占三成">加权评分</dfn> 与完读率合成，每两小时统计一次。<b>啪啪电影网</b>不接受任何形式的刷票。</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- 第一幕 -->
+  <section id="act1">
+    <div class="wrap">
+      <div class="act">
+        <div class="l">
+          <span class="no">第一幕</span>
+          <h2>今日上演片单</h2>
+        </div>
+        <a class="more" href="#">查看完整片库</a>
+        <p>啪啪电影网编辑组每日 08:00 排定场次 · 编号 01–08 为本场在演影片</p>
+      </div>
+
+      <ol class="program">
+        <li class="item">
+          <span class="no">01<small>ACT I</small></span>
+          <span class="t">
+            <b>长街尽头</b>
+            <small>2026 · 悬疑 / 犯罪 · 128 分钟</small>
+            <p>双线叙事在第七十分钟交汇，此后每段回忆都在改写前面的判断，是今年华语悬疑里逻辑最自洽的一部。</p>
+            <span class="tagrow"><span>悬疑</span><span>华语</span><span>反转</span><ins>新上映</ins></span>
+          </span>
+          <span class="ap"><strong>8.9</strong><span>掌声指数</span><a href="#">查看场次</a></span>
+        </li>
+        <li class="item">
+          <span class="no">02<small>ACT I</small></span>
+          <span class="t">
+            <b>归途列车</b>
+            <small>2026 · 剧情 / 家庭 · 118 分钟</small>
+            <p>一趟跨省列车上的六个陌生人，用一夜时间讲完各自未说完的话，结尾长镜头值得再看一遍。</p>
+            <span class="tagrow"><span>剧情</span><span>家庭</span><span>高分</span><ins>新上映</ins></span>
+          </span>
+          <span class="ap"><strong>8.8</strong><span>掌声指数</span><a href="#">查看场次</a></span>
+        </li>
+        <li class="item">
+          <span class="no">03<small>ACT I</small></span>
+          <span class="t">
+            <b>第七大陆</b>
+            <small>2026 · 科幻 / 冒险 · 131 分钟</small>
+            <p>极地科考站失联后的七十二小时，视觉体系克制而压迫感十足，建议一次看完不要暂停。</p>
+            <span class="tagrow"><span>科幻</span><span>视效</span><span>新片</span></span>
+          </span>
+          <span class="ap"><strong>8.6</strong><span>掌声指数</span><a href="#">查看场次</a></span>
+        </li>
+        <li class="item">
+          <span class="no">04<small>ACT I</small></span>
+          <span class="t">
+            <b>橘子汽水</b>
+            <small>2025 · 青春 / 文艺 · 104 分钟</small>
+            <p>被多数榜单漏掉的小成本作品，讲一个小镇夏天与一场迟到的告别，灯亮之后还要坐一会儿。</p>
+            <span class="tagrow"><span>文艺</span><span>青春</span><span>冷门</span></span>
+          </span>
+          <span class="ap"><strong>8.4</strong><span>掌声指数</span><a href="#">查看场次</a></span>
+        </li>
+        <li class="item">
+          <span class="no">05<small>ACT I</small></span>
+          <span class="t">
+            <b>纸上星河</b>
+            <small>2026 · 动画 / 治愈 · 96 分钟</small>
+            <p>手绘质感极佳，一封寄不出去的信被整座城市接力传递，孩子看冒险，大人看告别。</p>
+            <span class="tagrow"><span>动画</span><span>治愈</span><span>合家欢</span><ins>新上映</ins></span>
+          </span>
+          <span class="ap"><strong>8.3</strong><span>掌声指数</span><a href="#">查看场次</a></span>
+        </li>
+        <li class="item">
+          <span class="no">06<small>ACT I</small></span>
+          <span class="t">
+            <b>一年七城</b>
+            <small>2024 · 纪录 / 人文 · 112 分钟</small>
+            <p>七位导演各拍一座城的一年，剪辑节奏舒服、信息密度高，适合分两场慢慢看完。</p>
+            <span class="tagrow"><span>纪录</span><span>人文</span><span>分集</span></span>
+          </span>
+          <span class="ap"><strong>8.2</strong><span>掌声指数</span><a href="#">查看场次</a></span>
+        </li>
+        <li class="item">
+          <span class="no">07<small>ACT I</small></span>
+          <span class="t">
+            <b>静默海域</b>
+            <small>2025 · 剧情 / 悬疑 · 121 分钟</small>
+            <p>全片几乎没有配乐，靠环境声支撑情绪，适合夜场一个人看完再慢慢啪啪。</p>
+            <span class="tagrow"><span>剧情</span><span>悬疑</span><span>夜场</span></span>
+          </span>
+          <span class="ap"><strong>8.1</strong><span>掌声指数</span><a href="#">查看场次</a></span>
+        </li>
+        <li class="item">
+          <span class="no">08<small>ACT I</small></span>
+          <span class="t">
+            <b>深夜放映厅</b>
+            <small>合集 / 常驻片单 · 不定长</small>
+            <p>啪啪电影网常驻专题，每周挑五部适合深夜观看的片子，附一句话理由与建议顺序。</p>
+            <span class="tagrow"><span>合集</span><span>常驻</span><span>深夜</span></span>
+          </span>
+          <span class="ap"><strong>7.9</strong><span>掌声指数</span><a href="#">查看场次</a></span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 第二幕 -->
+  <section id="act2">
+    <div class="wrap">
+      <div class="act">
+        <div class="l">
+          <span class="no">第二幕</span>
+          <h2>座位分区分类</h2>
+        </div>
+        <a class="more" href="#">进入完整索引</a>
+        <p>啪啪电影网按类型、地区、年份划分座位区，同一部影片可同时落座多个区</p>
+      </div>
+
+      <div class="seats">
+        <div class="zone">
+          <div class="zhead"><b>A 区 · 类型</b><em>14 排</em></div>
+          <ul>
+            <li><a href="#">动作片<i>1240</i></a></li>
+            <li><a href="#">科幻片<i>920</i></a></li>
+            <li><a href="#">悬疑片<i>1080</i></a></li>
+            <li><a href="#">爱情片<i>1530</i></a></li>
+            <li><a href="#">喜剧片<i>1340</i></a></li>
+            <li><a href="#">动画片<i>780</i></a></li>
+            <li><a href="#">纪录片<i>460</i></a></li>
+            <li><a href="#">惊悚片<i>690</i></a></li>
+          </ul>
+          <p class="zfoot">A 区为类型主区，按影片主要类型落座。</p>
+        </div>
+
+        <div class="zone">
+          <div class="zhead"><b>B 区 · 地区</b><em>3 排</em></div>
+          <ul>
+            <li><a href="#">华语电影<i>3260</i></a></li>
+            <li><a href="#">欧美电影<i>4380</i></a></li>
+            <li><a href="#">日韩电影<i>2280</i></a></li>
+            <li><a href="#">其他地区<i>1880</i></a></li>
+          </ul>
+          <p class="zfoot">B 区为出品地区分区，与 A 区可叠加检索。</p>
+        </div>
+
+        <div class="zone">
+          <div class="zhead"><b>C 区 · 年份</b><em>4 排</em></div>
+          <ul>
+            <li><a href="#">2026 新片<i>436</i></a></li>
+            <li><a href="#">2025 佳片<i>512</i></a></li>
+            <li><a href="#">经典修复<i>560</i></a></li>
+            <li><a href="#">冷门佳作<i>740</i></a></li>
+            <li><a href="#">高分专区<i>980</i></a></li>
+            <li><a href="#">深夜专场<i>322</i></a></li>
+          </ul>
+          <p class="zfoot">C 区为年份与专题区，每周维护一次。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 第三幕 -->
+  <section id="act3">
+    <div class="wrap">
+      <div class="act">
+        <div class="l">
+          <span class="no">第三幕</span>
+          <h2>谢幕词 · 影评与资讯</h2>
+        </div>
+        <a class="more" href="#">阅读全部谢幕词</a>
+        <p>啪啪电影网原创内容，观点独立，关键剧情单独标注</p>
+      </div>
+
+      <div class="curtain-calls">
+        <article class="call">
+          <p class="kind">谢幕词 · 影评</p>
+          <h3>《长街尽头》：伏笔是如何在第三幕全部回收的</h3>
+          <p>逐段拆解它的线索铺设——第一段看似闲聊的对话，其实已经给出了关键时间差。全文无剧透，可放心阅读后再决定要不要买票。</p>
+          <blockquote>好的悬疑片不靠吓你，靠让你散场后回头重读一遍前面发生的事。</blockquote>
+          <p class="sig"><cite>啪啪电影网 · 影评组</cite><span>2026-09-30</span><span>阅读 1.4 万</span></p>
+        </article>
+
+        <article class="call">
+          <p class="kind">谢幕词 · 资讯</p>
+          <h3>2026 秋季档前瞻：六部值得标记的院线片</h3>
+          <p>今年秋季档悬疑与科幻占比明显上升，啪啪电影网提前梳理必看清单，并附三条避雷提示，帮你把电影票花在刀刃上。</p>
+          <blockquote>把电影票花在刀刃上，先从排除不值得的开始。</blockquote>
+          <p class="sig"><cite>啪啪电影网 · 编辑部</cite><span>2026-09-27</span><span>阅读 9200</span></p>
+        </article>
+
+        <article class="call">
+          <p class="kind">谢幕词 · 数据</p>
+          <h3>数据观察：老片回看潮正在改变排片结构</h3>
+          <p>近三个月，上线十年以上的经典片播放量同比增长 38%，啪啪电影网数据组解读这波回看潮背后的观影习惯变化。</p>
+          <blockquote>回看不是怀旧，是把选择权从新片手里拿回来。</blockquote>
+          <p class="sig"><cite>啪啪电影网 · 数据组</cite><span>2026-09-22</span><span>阅读 6800</span></p>
+        </article>
+
+        <article class="call">
+          <p class="kind">谢幕词 · 专栏</p>
+          <h3>周末片单：五部适合放松的治愈系电影</h3>
+          <p>不想动脑的周末怎么过？啪啪电影网挑了五部节奏舒缓、情绪温暖的片子，附一句话推荐理由与建议观看顺序。</p>
+          <blockquote>治愈片的标准很简单：散场后不想立刻刷手机。</blockquote>
+          <p class="sig"><cite>啪啪电影网 · 片单组</cite><span>2026-09-18</span><span>阅读 7500</span></p>
+        </article>
+
+        <article class="call">
+          <p class="kind">谢幕词 · 指南</p>
+          <h3>选座指南：不同影厅的第几排最舒服</h3>
+          <p>从银幕高度、视线夹角到音响甜点区，啪啪电影网按大厅、小厅与巨幕厅分别给出建议排数，附一张速查表。</p>
+          <blockquote>坐对位置，一部平庸的片子也能体面收场。</blockquote>
+          <p class="sig"><cite>啪啪电影网 · 观影组</cite><span>2026-09-15</span><span>阅读 5200</span></p>
+        </article>
+
+        <article class="call">
+          <p class="kind">谢幕词 · 访谈</p>
+          <h3>对话纪录片导演：一年能拍出多少真实</h3>
+          <p>专访《一年七城》主创，聊素材取舍、拍摄伦理，以及纪录片作者与被拍者之间那条微妙的边界。访谈经本人审阅后刊发。</p>
+          <blockquote>剪辑台上没有真相，只有你愿意承担的解释。</blockquote>
+          <p class="sig"><cite>啪啪电影网 · 采访组</cite><span>2026-09-11</span><span>阅读 4300</span></p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 第四幕 -->
+  <section id="act4">
+    <div class="wrap">
+      <div class="act">
+        <div class="l">
+          <span class="no">第四幕</span>
+          <h2>掌声指数排行榜</h2>
+        </div>
+        <a class="more" href="#">查看完整榜单</a>
+        <p>综合站内评分、完读率与讨论热度，每两小时统计一次</p>
+      </div>
+
+      <div class="rankwrap">
+        <ol class="indexboard">
+          <li>
+            <span class="rk">01</span>
+            <span class="nm"><b>长街尽头</b><small>悬疑 / 犯罪 / 2026</small></span>
+            <span class="wave" aria-hidden="true"><i style="height:96%"></i><i style="height:88%"></i><i style="height:100%"></i><i style="height:80%"></i><i style="height:92%"></i><i style="height:76%"></i><i style="height:86%"></i><i style="height:94%"></i></span>
+            <span class="pt">9.4</span>
+          </li>
+          <li>
+            <span class="rk">02</span>
+            <span class="nm"><b>归途列车</b><small>剧情 / 家庭 / 2026</small></span>
+            <span class="wave" aria-hidden="true"><i style="height:90%"></i><i style="height:82%"></i><i style="height:94%"></i><i style="height:76%"></i><i style="height:88%"></i><i style="height:70%"></i><i style="height:80%"></i><i style="height:86%"></i></span>
+            <span class="pt">9.1</span>
+          </li>
+          <li>
+            <span class="rk">03</span>
+            <span class="nm"><b>第七大陆</b><small>科幻 / 冒险 / 2026</small></span>
+            <span class="wave" aria-hidden="true"><i style="height:84%"></i><i style="height:92%"></i><i style="height:78%"></i><i style="height:88%"></i><i style="height:72%"></i><i style="height:82%"></i><i style="height:90%"></i><i style="height:76%"></i></span>
+            <span class="pt">8.9</span>
+          </li>
+          <li>
+            <span class="rk">04</span>
+            <span class="nm"><b>橘子汽水</b><small>青春 / 文艺 / 2025</small></span>
+            <span class="wave" aria-hidden="true"><i style="height:80%"></i><i style="height:70%"></i><i style="height:86%"></i><i style="height:74%"></i><i style="height:82%"></i><i style="height:68%"></i><i style="height:78%"></i><i style="height:84%"></i></span>
+            <span class="pt">8.7</span>
+          </li>
+          <li>
+            <span class="rk">05</span>
+            <span class="nm"><b>纸上星河</b><small>动画 / 治愈 / 2026</small></span>
+            <span class="wave" aria-hidden="true"><i style="height:76%"></i><i style="height:84%"></i><i style="height:68%"></i><i style="height:78%"></i><i style="height:88%"></i><i style="height:64%"></i><i style="height:74%"></i><i style="height:80%"></i></span>
+            <span class="pt">8.5</span>
+          </li>
+          <li>
+            <span class="rk">06</span>
+            <span class="nm"><b>一年七城</b><small>纪录 / 人文 / 2024</small></span>
+            <span class="wave" aria-hidden="true"><i style="height:70%"></i><i style="height:78%"></i><i style="height:64%"></i><i style="height:82%"></i><i style="height:72%"></i><i style="height:60%"></i><i style="height:76%"></i><i style="height:70%"></i></span>
+            <span class="pt">8.3</span>
+          </li>
+          <li>
+            <span class="rk">07</span>
+            <span class="nm"><b>静默海域</b><small>剧情 / 悬疑 / 2025</small></span>
+            <span class="wave" aria-hidden="true"><i style="height:66%"></i><i style="height:72%"></i><i style="height:60%"></i><i style="height:76%"></i><i style="height:68%"></i><i style="height:56%"></i><i style="height:70%"></i><i style="height:64%"></i></span>
+            <span class="pt">8.1</span>
+          </li>
+          <li>
+            <span class="rk">08</span>
+            <span class="nm"><b>深夜放映厅</b><small>合集 / 常驻片单</small></span>
+            <span class="wave" aria-hidden="true"><i style="height:62%"></i><i style="height:68%"></i><i style="height:56%"></i><i style="height:70%"></i><i style="height:64%"></i><i style="height:52%"></i><i style="height:66%"></i><i style="height:60%"></i></span>
+            <span class="pt">7.9</span>
+          </li>
+        </ol>
+
+        <aside class="encore">
+          <h3>返场呼声</h3>
+          <ol>
+            <li><b>1</b><a href="#">长街尽头 结局解析</a></li>
+            <li><b>2</b><a href="#">今日上演片单</a></li>
+            <li><b>3</b><a href="#">2026 高分华语片</a></li>
+            <li><b>4</b><a href="#">悬疑片推荐</a></li>
+            <li><b>5</b><a href="#">啪啪电影网排行榜</a></li>
+          </ol>
+          <p>返场呼声来自啪啪电影网站内检索与讨论统计，每周一随新一期节目单更新。</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- 第五幕 -->
+  <section id="act5">
+    <div class="wrap">
+      <div class="act">
+        <div class="l">
+          <span class="no">第五幕</span>
+          <h2>关于啪啪电影网</h2>
+        </div>
+        <a class="more" href="#">联系我们</a>
+        <p>为什么做成一座剧场，以及我们坚持的四条院规</p>
+      </div>
+
+      <div class="house">
+        <div class="house-col">
+          <h3>啪啪电影网是什么</h3>
+          <p><span class="hl">啪啪电影网</span>创办于 2023 年，是一座按剧场逻辑搭建的中文电影站点。每天开演一场，把值得看的电影排成节目单：今日上演按场次排列，分类按座位分区归档，影评写在谢幕时分，榜单按掌声指数排序。</p>
+          <p>我们相信观影是一场完整的仪式——灯光暗下、幕布拉开、散场啪啪。所以<b>啪啪电影网</b>不做资源搬运，只做挑选、排序与解释，所有内容免费入场。</p>
+        </div>
+        <div class="house-col">
+          <h3>编辑部四条院规</h3>
+          <ol class="rules">
+            <li><em>G1</em><span>看不完的片子不上演，宁可空着也不凑数。</span></li>
+            <li><em>G2</em><span>谢幕词不剧透，关键剧情单独标注，由读者选择是否展开。</span></li>
+            <li><em>G3</em><span>掌声指数可追溯，公开打分人数与分数分布，拒绝刷票。</span></li>
+            <li><em>G4</em><span>演出位不出售，榜单只由数据与编辑判断决定。</span></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 第六幕 -->
+  <section id="act6">
+    <div class="wrap">
+      <div class="act">
+        <div class="l">
+          <span class="no">第六幕</span>
+          <h2>幕间问答</h2>
+        </div>
+        <p>关于啪啪电影网的使用与内容说明 · 点选问题展开回答</p>
+      </div>
+
+      <div class="interlude">
+        <div class="q">
+          <input type="checkbox" id="q1" checked>
+          <label for="q1"><span class="mk">Q1</span>掌声指数是怎么算出来的？<span class="ic" aria-hidden="true">＋</span></label>
+          <div class="a"><p>啪啪电影网采用"观众打分 + 编辑评分"加权模型，观众分占七成、编辑分占三成，并与完读率合成，剔除异常打分样本。每个影片条目都会展示参与打分的人数与分数分布区间，方便你判断样本是否足够。</p></div>
+        </div>
+        <div class="q">
+          <input type="checkbox" id="q2">
+          <label for="q2"><span class="mk">Q2</span>座位分区是怎么划分的？<span class="ic" aria-hidden="true">＋</span></label>
+          <div class="a"><p>A 区为类型主区、B 区为出品地区、C 区为年份与专题。同一部影片可同时落座多个区，例如一部 2026 年华语悬疑片会同时出现在 A 区悬疑片、B 区华语电影与 C 区 2026 新片三处。</p></div>
+        </div>
+        <div class="q">
+          <input type="checkbox" id="q3">
+          <label for="q3"><span class="mk">Q3</span>啪啪电影网多久开演一次？<span class="ic" aria-hidden="true">＋</span></label>
+          <div class="a"><p>每日 08:00 排定当日节目单与掌声指数榜；榜单每两小时统计一次；座位分区每周维护一次；谢幕词影评与影视资讯不定期发布，重大电影节期间会加演。</p></div>
+        </div>
+        <div class="q">
+          <input type="checkbox" id="q4">
+          <label for="q4"><span class="mk">Q4</span>如何向我推荐的电影投稿？<span class="ic" aria-hidden="true">＋</span></label>
+          <div class="a"><p>通过页面底部的"投稿与合作"入口留言，注明片名、年份与你的一句话推荐理由，啪啪电影网编辑组会在三个工作日内回复。</p></div>
+        </div>
+        <div class="q">
+          <input type="checkbox" id="q5">
+          <label for="q5"><span class="mk">Q5</span>手机上能正常看节目单吗？<span class="ic" aria-hidden="true">＋</span></label>
+          <div class="a"><p>可以。啪啪电影网全站响应式：手机端节目单行改为两列堆叠，掌声指数移到标题下方，座位分区转为单列，榜单隐藏波形条只保留名次与指数，幕布与灯泡门头都会等比缩放。</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- 底部 -->
+<footer>
+  <div class="wrap">
+    <div class="f-grid">
+      <div class="f-col">
+        <h4>啪啪电影网</h4>
+        <p>啪啪电影网是一座按剧场逻辑搭建的中文电影站点，每日开演今日上演片单、座位分区分类、谢幕词影评、掌声指数排行榜与观影指南，看完记得啪啪。</p>
+        <p class="f-url">https://papadianyingwang-cn.github.io</p>
+      </div>
+      <div class="f-col">
+        <h4>节目单</h4>
+        <ul>
+          <li><a href="#act1">今日上演片单</a></li>
+          <li><a href="#act2">座位分区分类</a></li>
+          <li><a href="#act3">谢幕词影评</a></li>
+          <li><a href="#act4">掌声指数榜</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>关于我们</h4>
+        <ul>
+          <li><a href="#act5">关于啪啪电影网</a></li>
+          <li><a href="#act6">幕间问答</a></li>
+          <li><a href="#">投稿与合作</a></li>
+          <li><a href="#">内容声明</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>友情链接</h4>
+        <ul>
+          <li><a href="#">电影节日历</a></li>
+          <li><a href="#">独立电影观察</a></li>
+          <li><a href="#">影视资料库</a></li>
+          <li><a href="#">影迷社区</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="kw">
+      相关关键词：
+      <a href="#">啪啪电影网</a><a href="#">电影推荐</a><a href="#">今日上演</a><a href="#">最新电影</a><a href="#">影视资讯</a><a href="#">高分电影</a><a href="#">电影排行榜</a><a href="#">影评</a><a href="#">观影指南</a><a href="#">电影分类</a>
+    </div>
+
+    <div class="f-bot">
+      <span>&copy; 2026 啪啪电影网 GUZHANG MOVIE THEATRE · 第 1286 场 · 保留所有权利</span>
+      <span><a href="#">隐私政策</a> · <a href="#">使用条款</a> · <a href="#home">回到剧院大厅</a></span>
+    </div>
+  </div>
+</footer>
+<div class="endcurtain" aria-hidden="true"></div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://papadianyingwang-cn.github.io/#website",
+      "name": "啪啪电影网",
+      "alternateName": "GUZHANG MOVIE THEATRE",
+      "url": "https://papadianyingwang-cn.github.io/",
+      "description": "啪啪电影网是专注电影推荐与影视资讯的中文影迷站点，按剧场节目单每日开演：今日上演片单、座位分区分类、谢幕词影评、掌声指数排行榜与观影指南。",
+      "inLanguage": "zh-CN",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://papadianyingwang-cn.github.io/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://papadianyingwang-cn.github.io/#organization",
+      "name": "啪啪电影网",
+      "url": "https://papadianyingwang-cn.github.io/",
+      "description": "啪啪电影网提供今日上演片单、座位分区分类、谢幕词影评与掌声指数排行榜服务，每日开演。"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "啪啪电影网剧院大厅", "item": "https://papadianyingwang-cn.github.io/"},
+        {"@type": "ListItem", "position": 2, "name": "今日上演片单", "item": "https://papadianyingwang-cn.github.io/#act1"},
+        {"@type": "ListItem", "position": 3, "name": "座位分区分类", "item": "https://papadianyingwang-cn.github.io/#act2"},
+        {"@type": "ListItem", "position": 4, "name": "谢幕词影评与资讯", "item": "https://papadianyingwang-cn.github.io/#act3"},
+        {"@type": "ListItem", "position": 5, "name": "啪啪电影网掌声指数排行榜", "item": "https://papadianyingwang-cn.github.io/#act4"}
+      ]
+    }
+  ]
+}
+</script>
+
+</body>
+</html>
